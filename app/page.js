@@ -1,5 +1,6 @@
 "use client"
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const [num, setNum] = useState(0);
@@ -9,18 +10,20 @@ const Home = () => {
   };
 
   const handleClick = () => {
-    setNum(generateNumber(1,80));
+    setNum(generateNumber(1, 80));
   };
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-r from-slate-600 to-slate-800">
-      <button 
-      onClick={handleClick}
-      className="w-80 h-80 bg-gradient-to-r from-sky-600 to-cyan-600 rounded-lg text-white text-lg font-bold flex items-center justify-center">
-        <div className="flex items-center justify-center text-9xl">
-          {num}
-        </div>
-      </button>
+      <motion.button
+        onClick={handleClick}
+        className="w-80 h-80 bg-gradient-to-r from-sky-600 to-cyan-600 rounded-full text-white font-bold flex items-center justify-center"
+        whileHover={{ scale: [null, 1.5, 1.4] }}
+        transition={{ duration: 0.3 }}
+        whileTap={{ scale: 1.4 }}
+      >
+        <div className="text-9xl">{num}</div>
+      </motion.button>
     </main>
   );
 };
