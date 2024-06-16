@@ -5,17 +5,23 @@ import Image from 'next/image'
 
 const Home = () => {
   //* new code
+  // holding the array of numbers
   const [numbers, setNumbers] = useState([]);
+  // keeping track of current index in the numbers array
   const [index, setIndex] = useState(0);
+  // holding the currently displayed number
   const [num, setNum] = useState(null);
 
-  useEffect(() => { // useEffect hook initializes numbers array with shuffled numbers from 1-80
+  // useEffect hook initializes numbers array with shuffled numbers from 1-80
+  useEffect(() => { 
+    // creating array from 1-80 and shuffling
     const shuffledNumbers = shuffleArray(Array.from({ length: 80 }, (_, i) => i + 1));
     setNumbers(shuffledNumbers);
     setNum(shuffledNumbers[0]); // setting initial number to first number in the shuffled array
   }, []);
 
-  const shuffleArray = (array) => { // shuffles array using fisher-yates algorithm
+  // shuffles array using fisher-yates algorithm
+  const shuffleArray = (array) => { 
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [array[i], array[j]] = [array[j], array[i]];
@@ -23,14 +29,16 @@ const Home = () => {
     return array;
   };
   
+  // handle button click
   const handleClick = () => {
-    let newIndex = index + 1;
+    let newIndex = index + 1; // increment the index
+    // if the index reaches the end of the array, it reshuffles and resets index
     if (newIndex >= numbers.length) {
       newIndex = 0;
-      setNumbers(shuffleArray([...numbers]));
+      setNumbers(shuffleArray([...numbers])); // reshuffling the array
     }
-    setIndex(newIndex);
-    setNum(numbers[newIndex]);
+    setIndex(newIndex); // updating the index state
+    setNum(numbers[newIndex]); // updates the display number
   };
 
 
